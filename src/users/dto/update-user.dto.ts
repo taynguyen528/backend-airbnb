@@ -1,4 +1,10 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { OmitType, PartialType } from '@nestjs/mapped-types';
 import { CreateUserDto } from './create-user.dto';
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {}
+export class UpdateUserDto extends OmitType(CreateUserDto, [
+  'passWord',
+] as const) {
+  userId: number;
+}
+
+//OmitType không muốn cập nhật trường nào thì dùng OmitType

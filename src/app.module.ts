@@ -5,6 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -23,13 +28,15 @@ import { User } from './users/entities/user.entity';
         autoLoadModels: true,
         synchronize: false,
         define: {
-          timestamps: false,
+          timestamps: true,
+          paranoid: true,
         },
       }),
       inject: [ConfigService],
     }),
     SequelizeModule.forFeature([User]),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

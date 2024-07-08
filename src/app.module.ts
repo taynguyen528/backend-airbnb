@@ -10,6 +10,9 @@ import { TokenModule } from './token/token.module';
 import { Token } from './token/entities/token.entity';
 import { ListRoomModule } from './list-room/list-room.module';
 import { AddressModule } from './address/address.module';
+import { ReservationModule } from './reservation/reservation.module';
+import { ReviewModule } from './review/review.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -40,6 +43,9 @@ import { AddressModule } from './address/address.module';
     TokenModule,
     ListRoomModule,
     AddressModule,
+    ReservationModule,
+    ReviewModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

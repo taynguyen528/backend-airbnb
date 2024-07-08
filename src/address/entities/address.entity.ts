@@ -1,62 +1,48 @@
 import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
 import { ListRoom } from 'src/list-room/entities/list-room.entity';
-import { Token } from 'src/token/entities/token.entity';
-import { OneToMany } from 'typeorm';
 
 @Table({
-  tableName: 'User',
+  tableName: 'address',
   timestamps: true,
   paranoid: true,
 })
-export class User extends Model<User> {
+export class Address extends Model<Address> {
   @Column({
     type: DataType.INTEGER,
-    primaryKey: true,
     autoIncrement: true,
+    primaryKey: true,
   })
-  userId: number;
+  addressId: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  name: string;
+  street: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  email: string;
+  city: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  passWord: string;
+  state: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: true,
-  })
-  phoneNumber: string;
-
-  @Column({
-    type: DataType.DATE,
-    allowNull: true,
-  })
-  birthDay: Date;
-
-  @Column({
-    type: DataType.ENUM('Male', 'Female', 'Other'),
-    allowNull: true,
-  })
-  gender: string;
-
-  @Column({
-    type: DataType.ENUM('Host', 'Guest'),
     allowNull: false,
   })
-  userType: string;
+  zipCode: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  country: string;
 
   @Column({
     type: DataType.DATE,
@@ -78,20 +64,6 @@ export class User extends Model<User> {
   })
   updatedAt: Date;
 
-  @HasMany(() => Token)
-  token: Token[];
-
-  @OneToMany(() => ListRoom, (listRoom) => listRoom.host)
+  @HasMany(() => ListRoom)
   listRooms: ListRoom[];
-}
-
-export enum Gender {
-  Male = 'Male',
-  Female = 'Female',
-  Other = 'Other',
-}
-
-export enum UserType {
-  Host = 'Host',
-  Guest = 'Guest',
 }

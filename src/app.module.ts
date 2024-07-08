@@ -6,10 +6,10 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
-import { AuthService } from './auth/auth.service';
-import { JwtService } from '@nestjs/jwt';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
-import { APP_GUARD } from '@nestjs/core';
+import { TokenModule } from './token/token.module';
+import { Token } from './token/entities/token.entity';
+import { ListRoomModule } from './list-room/list-room.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -28,15 +28,18 @@ import { APP_GUARD } from '@nestjs/core';
         autoLoadModels: true,
         synchronize: false,
         define: {
-          timestamps: true,
+          timestamps: false,
           paranoid: true,
         },
       }),
       inject: [ConfigService],
     }),
-    SequelizeModule.forFeature([User]),
+    SequelizeModule.forFeature([User, Token]),
     UsersModule,
     AuthModule,
+    TokenModule,
+    ListRoomModule,
+    AddressModule,
   ],
   controllers: [AppController],
   providers: [AppService],

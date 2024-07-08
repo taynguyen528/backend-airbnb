@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { Gender, UserType } from '../entities/user.entity';
 
-export class CreateUserDto {
+class BaseUserDto {
   @IsString({ message: 'Name must be a letter character!' })
   @IsNotEmpty({ message: 'Name cannot be empty!' })
   name: string;
@@ -30,8 +30,12 @@ export class CreateUserDto {
   @IsEnum(Gender)
   @IsNotEmpty({ message: 'Gender cannot be empty!' })
   gender: Gender;
+}
 
+export class CreateUserDto extends BaseUserDto {
   @IsEnum(UserType)
   @IsNotEmpty({ message: 'User Type cannot be empty!' })
   userType: UserType;
 }
+
+export class RegisterUserDto extends BaseUserDto {}

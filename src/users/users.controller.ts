@@ -4,7 +4,6 @@ import {
   Get,
   Param,
   Post,
-  Logger,
   Patch,
   Delete,
   Put,
@@ -17,8 +16,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  private readonly logger = new Logger(UsersController.name);
-
   constructor(private readonly usersService: UsersService) {}
 
   @Get()

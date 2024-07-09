@@ -46,9 +46,11 @@ export class ListRoomService {
     return this.findOne(id);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<string> {
     await this.listRoomModel.destroy({
       where: { listingId: id },
     });
+
+    return 'Xử lý thành công!';
   }
 }

@@ -29,20 +29,23 @@ export class ListRoomController {
   }
 
   @Get(':id')
+  @ResponseMessage('Find ListRoom By Id')
   findOne(@Param('id') id: string) {
     return this.listRoomService.findOne(+id);
   }
 
   @Put(':id')
+  @ResponseMessage('Update ListRoom')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateListRoomDto: UpdateListRoomDto,
   ) {
-    return this.listRoomService.update(+id, updateListRoomDto);
+    return this.listRoomService.update(id, updateListRoomDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.listRoomService.remove(+id);
+  @ResponseMessage('Delete ListRoom')
+  remove(@Param('id') id: number) {
+    return this.listRoomService.remove(id);
   }
 }
